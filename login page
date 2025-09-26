@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "calibri";
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url("/home/dark_onii/Downloads/WhatsApp Image 2025-09-26 at 1.11.45 PM.jpeg") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .main-container {
+            min-height: 100vh;
+            min-width: 450px;
+        }
+
+        .centered-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 400px;
+            height: 480px;
+            display: grid;
+            position: relative;
+        }
+
+        .icon {
+            position: absolute;
+            width: 85px;
+            font-size: 50px;
+            display: grid;
+            height: 85px;
+            place-content: center;
+            border: 1px solid #2a2a2a;
+            z-index: 1;
+            justify-self: center;
+            border-radius: 50%;
+            background: #ffffff;
+        }
+
+        .fa {
+            color: #000000;
+        }
+
+        form {
+            flex-direction: column;
+            padding: 25px 25px 10px;
+            height: 440px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.097);
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .title {
+            position: relative;
+            margin: 40px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .msg {
+            color: #fa2929;
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            top: 25%;
+        }
+
+        .field {
+            display: flex;
+            position: relative;
+            width: 100%;
+        }
+
+        .field .fa {
+            position: absolute;
+            font-size: 14px;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px rgb(14 14 14) inset;
+        }
+
+        input:-webkit-autofill {
+            -webkit-text-fill-color: #bababa !important;
+        }
+
+        ::placeholder {
+            color: rgb(0, 0, 0);
+            opacity: 0.2;
+        }
+
+        form input {
+            display: block;
+            outline: none;
+            width: 100%;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000000;
+            margin: 25px 0 5px;
+            caret-color: #000000;
+            background: transparent;
+            padding: 10px 25px 3px 0;
+            border-bottom: 1px solid #404040;
+        }
+
+        .action {
+            justify-content: space-between;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .action label {
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .action input {
+            width: auto;
+            margin: 0 8px 0 0;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .btn-container {
+            padding: 20px;
+            transition: 0.2s linear;
+        }
+
+        #login-btn {
+            padding: 5px 20px;
+            border: none;
+            background: rgb(0, 0, 0);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 15px;
+            transition: 0.3s;
+            margin: 25px 0;
+        }
+
+        #login-btn:hover {
+            cursor: pointer;
+        }
+
+        .signup {
+            color: rgb(47, 47, 47);
+            margin-top: 10px;
+        }
+
+        .shift-left {
+            transform: translateX(-120%);
+        }
+
+        .shift-top {
+            transform: translateY(-150%);
+        }
+
+        .shift-right {
+            transform: translateX(120%);
+        }
+
+        .shift-bottom {
+            transform: translateY(150%);
+        }
+
+        .no-shift {
+            transform: translate(0%, 0%);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container centered-flex">
+        <div class="form-container">
+            <i class="icon fa fa-user-circle"></i>
+            <form>
+                <div class="title">Login</div>
+                <div class="msg"></div>
+                <div class="field">
+                    <input id="uname" type="text" placeholder="Username">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="field">
+                    <input id="pass" type="password" placeholder="Password">
+                    <i class="fa fa-lock"></i>
+                </div>
+                <div class="action">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#">Forget Password?</a>
+                </div>
+                <button class="btn-container no-shift" id="login-btn" disabled>Login</button>
+                <div class="signup">Don't have an Account? <a href="#">Sign up</a></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const uname = document.querySelector("#uname");
+        const pass = document.querySelector("#pass");
+        const btnContainer = document.querySelector(".btn-container");
+        const btn = document.querySelector("#login-btn");
+        const form = document.querySelector("form");
+        const msg = document.querySelector(".msg");
+
+        btn.disabled = true;
+
+        function shiftButton() {
+            showMsg();
+            const positions = [
+                "shift-left",
+                "shift-top",
+                "shift-right",
+                "shift-bottom",
+            ];
+            const currentPosition = positions.find((dir) =>
+                btn.classList.contains(dir)
+            );
+            const nextPosition =
+                positions[(positions.indexOf(currentPosition) + 1) % positions.length];
+            btn.classList.remove(currentPosition);
+            btn.classList.add(nextPosition);
+        }
+
+        function showMsg() {
+            const isEmpty = uname.value === "" || pass.value === "";
+            btn.classList.toggle("no-shift", !isEmpty);
+
+            if (isEmpty) {
+                btn.disabled = true;
+                msg.style.color = "rgb(218 49 49)";
+                msg.innerText = "Please fill the input fields before proceeding";
+            } else {
+                msg.innerText = "Great! Now you can proceed";
+                msg.style.color = "#006100ff";
+                btn.disabled = false;
+                btn.classList.add("no-shift");
+            }
+        }
+
+        btnContainer.addEventListener("mouseover", shiftButton);
+        btn.addEventListener("mouseover", shiftButton);
+        form.addEventListener("input", showMsg);
+        btn.addEventListener("touchstart", shiftButton);
+    </script>
+</body>
+</html>
