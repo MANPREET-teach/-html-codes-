@@ -2,9 +2,9 @@ import pygame
 import random
 import math
 
-# -------------------
-# CONFIG
-# -------------------
+-------------------
+CONFIG 
+-------------------
 WIDTH, HEIGHT = 700, 700
 PARTICLE_COUNT = 15000
 NAME = "Love You"
@@ -23,9 +23,8 @@ except pygame.error:
     print("Font file not found. Using Arial as a fallback.")
     font = pygame.font.SysFont("Arial", 72, bold=True)
 
-# -------------------
-# Heart Generation and Bounding Box
-# -------------------
+-------------------
+Heart Generation and Bounding Box -------------------
 def heart_points(n, scale, offset):
     """
     Generate n random points inside the heart more efficiently.
